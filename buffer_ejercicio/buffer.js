@@ -5,7 +5,7 @@
 //Hay dos formas de hacerlo, haciendo uso del método alloc()
 //que es un método seguro ya que inicializa los octetos a cero
 let buffer_alloc = Buffer.alloc(8);
-
+    
 //si usamos allocUnsafe() inicializaríamos un buffer con octetos
 //residuales que residen en la memoria del sistema
 let buffer_alloc_unsafe = Buffer.allocUnsafe(8);
@@ -32,6 +32,10 @@ console.log(buffer_nombres);
 
 //para leerlo de acuerdo a nuestro entendimiento lo decodificamos
 let temp_nombres = buffer_nombres.toString("utf-8", 0, buffer_nombres.length);
+
+//si deseamos pasar todo el buffer completo a string no hace falta indicar el inicio y el final
+let temp_nombres = buffer_nombres.toString("utf-8");
+
 console.log(temp_nombres);
 
 //Es posible escribir en un buffer, por ejemplo en el buffer_nombres
