@@ -8,8 +8,9 @@ function append() {
     return new Promise(resolve => {
         setTimeout(() => {
             resolve(
-                fs.appendFile(filename, 'Un texto cualquiera', (handleError) => {
-                    console.log("Append realizado con éxito");
+                fs.appendFile(filename, 'Un texto cualquiera', (error) => {
+                    if(error) e();
+                    else console.log("Append realizado con éxito");
                 })
             );
         });
@@ -21,8 +22,9 @@ function read() {
     return new Promise(resolve => {
         setTimeout(() => {
             resolve(
-                fs.readFile(filename, 'utf-8', (handleError, data) => {
-                    console.log(data)
+                fs.readFile(filename, 'utf-8', (error, data) => {
+                    if(error) e();
+                    else console.log(data)
                 })
             );
         });
@@ -32,26 +34,27 @@ function read() {
 //escribimos sobreescribiendo la información
 function write() {
     return new Promise(resolve => {
-        setTimeout( () => {
+        setTimeout(() => {
             resolve(
-                fs.writeFile(filename, "Texto que sobreescribe al anterior", (handleError) => {
-                    console.log("Escritura realizada con éxito")
+                fs.writeFile(filename, "Texto que sobreescribe al anterior", (error) => {
+                    if(error) e();
+                    else console.log("Escritura realizada con éxito")
                 })
             );
         });
     })
 }
 
-function handleError(error) {
+const e = function handleError(error) {
     console.log(error);
 }
 
 async function main() {
     await append();
     await read();
-    await write();    
+    await write();
     await read();
-    
+
 }
 
 main()
